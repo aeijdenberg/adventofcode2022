@@ -1,12 +1,11 @@
-cur = []
-all = []
+cnt = 0
 for line in open('input.txt'):
     line = line.strip()
-    if len(line):
-        cur.append(int(line))
-    else:
-        all.append(cur)
-        cur = []
-if len(cur):
-    all.append(cur)
-print(max(sum(x) for x in all))
+    a, b = line.split(',')
+    aB, bB = a.split('-'), b.split('-')
+    aX, aY, bX, bY = int(aB[0]), int(aB[1]), int(bB[0]), int(bB[1])
+
+    sA, sB = set(x for x in range(aX, aY + 1)), set(x for x in range(bX, bY + 1))
+    if sA <= sB or sB <= sA:
+        cnt += 1
+print(cnt)
