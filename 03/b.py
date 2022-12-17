@@ -1,14 +1,11 @@
-cur = []
-all = []
-for line in open('input.txt'):
-    line = line.strip()
-    if len(line):
-        cur.append(int(line))
+def priority(c):
+    if c >= 'a' and c <= 'z':
+        return 1 + ord(c) - ord('a')
     else:
-        all.append(cur)
-        cur = []
-if len(cur):
-    all.append(cur)
-sums = [sum(x) for x in all]
-sums.sort(reverse=True)
-print(sum(sums[:3]))
+        return 1 + 26 + ord(c) - ord('A')
+
+overlaps = []
+lines = [line.strip() for line in open('input.txt')]
+for i in range(len(lines) // 3):
+    overlaps.append(list(set(lines[i*3]) & set(lines[1+i*3]) & set(lines[2+i*3]))[0])
+print(sum(priority(x) for x in overlaps))
