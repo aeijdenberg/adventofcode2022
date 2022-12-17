@@ -1,12 +1,16 @@
-cur = []
-all = []
+scores = []
 for line in open('input.txt'):
     line = line.strip()
-    if len(line):
-        cur.append(int(line))
+    them, us = 'ABC'.index(line[0]), 'XYZ'.index(line[-1])
+    score = us + 1
+    if us == them:
+        # draw
+        score += 3
+    elif us == ((them + 1) % 3):
+        # win
+        score += 6
     else:
-        all.append(cur)
-        cur = []
-if len(cur):
-    all.append(cur)
-print(max(sum(x) for x in all))
+        # loss
+        pass
+    scores.append(score)
+print(sum(scores))
